@@ -5,7 +5,7 @@ const cors = require("cors");
 const pool = require("./db");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173" }));
 app.use(express.json());
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
