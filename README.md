@@ -9,7 +9,6 @@ The database must exist before starting the backend. The backend applies
 if it does not already exist. To run the migration manually:
 
 ```bash
-psql -U postgres -c "CREATE DATABASE employee_db;"
 npm --prefix backend run migrate
 ```
 
