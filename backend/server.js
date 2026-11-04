@@ -23,6 +23,10 @@ function validate(body) {
   return errors;
 }
 
+app.get("/health", (req, res) => {
+  res.send("Employee Registration API is running");
+});
+
 // List (with optional ?search=)
 app.get("/api/employees", async (req, res) => {
   try {
