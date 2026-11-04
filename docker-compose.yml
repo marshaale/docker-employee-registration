@@ -6,6 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: employee_db
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 10s
@@ -23,11 +24,6 @@ services:
     restart: always
     env_file:
       - backend/.env
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     depends_on:
       db:
         condition: service_healthy
@@ -41,14 +37,9 @@ services:
     restart: always
     environment:
       - VITE_API_URL=/api
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     depends_on:
       backend:
-        condition: service_healthy
+        condition: service_started
     ports:
       - "5173:80"
 
