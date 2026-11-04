@@ -1,4 +1,4 @@
-const BASE = "/api/employees";
+const BASE = `${import.meta.env.VITE_API_URL}/employees`;
 
 async function request(url, options) {
   const res = await fetch(url, {
@@ -20,4 +20,5 @@ export const createEmployee = (body) =>
   request(BASE, { method: "POST", body: JSON.stringify(body) });
 export const updateEmployee = (id, body) =>
   request(`${BASE}/${id}`, { method: "PUT", body: JSON.stringify(body) });
-export const deleteEmployee = (id) => request(`${BASE}/${id}`, { method: "DELETE" });
+export const deleteEmployee = (id) =>
+  request(`${BASE}/${id}`, { method: "DELETE" });
