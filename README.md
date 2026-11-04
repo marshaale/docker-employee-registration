@@ -4,9 +4,13 @@ React (Vite) + Node/Express + PostgreSQL.
 
 ## 1. Database
 
+The database must exist before starting the backend. The backend applies
+`backend/schema.sql` automatically at startup, creating the `employees` table
+if it does not already exist. To run the migration manually:
+
 ```bash
 psql -U postgres -c "CREATE DATABASE employee_db;"
-psql -U postgres -d employee_db -f backend/schema.sql
+npm --prefix backend run migrate
 ```
 
 ## 2. Backend (http://localhost:3000)

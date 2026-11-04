@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
+const migrate = require("./migrate");
 
 const app = express();
 app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173" }));
@@ -128,4 +129,18 @@ app.delete("/api/employees/:id", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
+
+async function start() {
+  if (process.env.NODE_ENV === "production") {
+    await migrate();
+  }
+  app.listen(PORT, () =>
+    console.log(`API running on http://localhost:${PORT}`),
+  );
+}
+
+start().catch(async (error) => {
+  console.error("Could not start the API:", error);
+  await pool.end();
+  process.exitCode = 1;
+});
