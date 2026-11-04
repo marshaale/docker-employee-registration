@@ -12,6 +12,8 @@ FROM node:24-alpine3.23
 
 COPY --from=build /app /app
 
+WORKDIR /app
+
 RUN addgroup -S nonroot && adduser -S nonroot -G nonroot
 
 USER nonroot
