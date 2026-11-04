@@ -16,9 +16,9 @@ RUN addgroup -S nonroot && adduser -S nonroot -G nonroot
 
 USER nonroot
 
-ENV PORT=${PORT:-5000}
+ENV PORT=${PORT:-3000}
 ENV NODE_ENV=production
 
-EXPOSE ${PORT:-5000}
+EXPOSE ${PORT:-3000}
 
 CMD ["node", "server.js"]
